@@ -7,7 +7,7 @@ document.body.appendChild(mainTable);
 let controlPanel = createButtonDiv("↑", "↓", "←", "→", "Mark Cell");
 document.body.appendChild(controlPanel);
 
-let activeCell = document.getElementById("1 1");
+let activeCell = document.getElementById("1, 1");
 activeCell.style.border = activeBorderStyle;
 
 document.getElementById("Mark Cell").addEventListener("click", changeToYellow);
@@ -47,8 +47,8 @@ function createTable(size){
         
         for(let j = 1; j <= size; j++){
             const cell = document.createElement("td");
-            cell.textContent = `${i} ${j}`;
-            cell.id = `${i} ${j}`;
+            cell.textContent = `${i}, ${j}`;
+            cell.id = `${i}, ${j}`;
             cell.style.border = normalBorderStyle;
             row.appendChild(cell);
         }
@@ -115,8 +115,8 @@ function moveLeft(){
 function moveDown(){
 
     if(activeCell.parentElement.nextElementSibling != null){
-        //id is "${row} ${col}", so split extracts the column number into colNumber[1]
-        const colNumber = activeCell.id.split(" ");
+        //id is "${row}, ${col}", so split extracts the column number into colNumber[1]
+        const colNumber = activeCell.id.split(", ");
 
         //temp is the _first_ cell of the next row
         let temp = activeCell.parentElement.nextElementSibling.firstElementChild;
@@ -136,8 +136,8 @@ function moveUp(){
 
     if(activeCell.parentElement.previousElementSibling != null){
 
-        //id is "${row} ${col}", so split extracts the column number into colNumber[1]
-        const colNumber = activeCell.id.split(" ");
+        //id is "${row}, ${col}", so split extracts the column number into colNumber[1]
+        const colNumber = activeCell.id.split(", ");
 
         //temp is the _first_ cell of the prev row
         let temp = activeCell.parentElement.previousElementSibling.firstElementChild;
