@@ -1,0 +1,41 @@
+tbody th {
+	font-style: italic;
+	font-weight: normal;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+tbody tr:nth-of-type(2n + 0)
+{
+	background-color: #444444;
+}
+
+tbody tr:nth-of-type(2n + 1)
+{
+	background-color: #d6af00;
+}
+
+.outer-content{
+	margin-top: 20px;
+	float: left;
+	width: 75%;
+	padding: 15px;
+	background-color: pink;
+}
+
+.inner-content {
+	width: 75%;
+	margin: 0 auto;
+	float: center;
+	background-color: #81e2ff; 
+}
+
+thead {
+	border: 2px solid black;
+}
+
+div + * {
+	clear: both; 
+}

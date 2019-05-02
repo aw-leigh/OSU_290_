@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+</head>
+<body>
+
+<h1>Mountains</h1>
+
+<div id="mountains"></div>
+
+<script>
+    const MOUNTAINS = [
+    {name: "Kilimanjaro", height: 5895, place: "Tanzania"},
+    {name: "Everest", height: 8848, place: "Nepal"},
+    {name: "Mount Fuji", height: 3776, place: "Japan"},
+    {name: "Vaalserberg", height: 323, place: "Netherlands"},
+    {name: "Denali", height: 6168, place: "United States"},
+    {name: "Popocatepetl", height: 5465, place: "Mexico"},
+    {name: "Mont Blanc", height: 4808, place: "Italy/France"}
+    ];
+
+    // Your code here
+
+    //create the table and attach it to the document so it's visible
+    let mountainTable = document.createElement("table");
+    document.getElementById("mountains").appendChild(createTable(MOUNTAINS));
+
+
+    //helper functions
+    function createTable(dataArray){
+        let table = document.createElement("table");
+        let fields = Object.keys(dataArray[0]);
+
+        table.appendChild(createRow("th", fields[0], fields[1], fields[2]));
+        for(let i = 0; i < dataArray.length; i++){
+            table.appendChild(createRow("td", dataArray[i].name, dataArray[i].height, dataArray[i].place));
+        } 
+
+        return table;
+    };
+
+    //create row makes a tr, calls populateRow to fill it in, and returns the row
+    //Example input:   createRow("td", "Kilimanjaro", "5895", "Tanzania"));
+    function createRow(type, ... textIn){
+        let row = document.createElement("tr");
+        row.appendChild(populateRow(type, ... textIn));
+        return row;
+    }; 
+    
+    //populateRow takes a type (should be th or td) and text, creates a new node,
+    //appends nodes with that text included to that original node, and returns the node
+    function populateRow(type, ... textIn){
+        let node = document.createElement(type);
+        for(let text of textIn){
+            let cell = document.createElement(type);
+            cell.textContent = text;
+            node.appendChild(cell);
+        }
+        return node;
+    }
+
+
+</script>
+
+</body>
+</html>
