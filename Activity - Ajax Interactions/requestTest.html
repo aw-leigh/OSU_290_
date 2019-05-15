@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Requests test</title>
+</head>
+<body>
+  
+  <div>
+    <form>
+      <fieldset>
+        <legend>Weather Lookup</legend>
+        <input type="text" name="zip" id="zipinput" placeholder="ZIP Code">
+        <button type="submit" id="zipinputbutton">Submit</button>
+        <br>
+        <input type="text" name="city" id="cityinput" placeholder="City">
+        <button type="submit" id="cityinputbutton">Submit</button>
+        <br>
+        <div>
+          <div id="outputCity">City: </div>
+          <div id="outputTemp">Temperature: </div>
+          <div id="outputHumidity">Humidity: </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+      <form>
+        <fieldset>
+          <legend>httpbin POST</legend>
+          <input type="text" name="zip" id="httpbininput" placeholder="Input text here">
+          <button id="httpbinbutton">POST</button>
+          <div>
+            <div>Response.data:</div>
+            <div id="httpbinOutput"></div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+<script src="./requestTest.js"></script>
+
+</body>
+</html>

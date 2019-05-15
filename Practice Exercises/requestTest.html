@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Requests test</title>
+</head>
+<body>
+  
+  <div>
+    <form>
+      <fieldset>
+        <legend>Weather Lookup</legend>
+        <input type="text" name="zip" id="zipinput" placeholder="ZIP Code">
+        <button type="submit" id="zipinputbutton">Submit</button>
+        <br>
+        <input type="text" name="city" id="cityinput" placeholder="City">
+        <button type="submit" id="cityinputbutton">Submit</button>
+        <br>
+        <div>
+          <div id="outputCity">City: </div>
+          <div id="outputTemp">Temperature: </div>
+          <div id="outputHumidity">Humidity: </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+  <br>
+  <br>
+
+  <div>
+      <form>
+        <fieldset>
+          <legend>httpbin POST</legend>
+          <input type="text" name="zip" id="httpbininput" placeholder="Input text here">
+          <button id="httpbinbutton">POST</button>
+          <div>
+            <div>Response.data:</div>
+            <div id="httpbinOutput"></div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+<script>
+  document.getElementById("zipinputbutton").addEventListener("click", function(e){
+    let zipCode = document.getElementById("zipinput").value;
+    let type = "zip";
+    makeWeatherCall(zipCode, type);
+    e.preventDefault();
+  });
+
+  document.getElementById("cityinputbutton").addEventListener("click", function(e){
+    let cityName = document.getElementById("cityinput").value;
+    let type = "q"
+    makeWeatherCall(cityName, type);
+    e.preventDefault();
+  });
+
+  function makeWeatherCall(value, type){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", `http://api.openweathermap.org/data/2.5/weather?${type}=${value}&appid=92b5db477e67c8a758eb2a5f21235059&units=metric`, true);
+    
+    xhr.addEventListener('load', function(){
+      if(xhr.status >= 200 && xhr.status < 400){
+        let response = JSON.parse(xhr.responseText);
+        document.getElementById("outputCity").textContent = `City: ${response.name}`;
+        document.getElementById("outputTemp").textContent = `Temperature: ${response.main.temp}C`;
+        document.getElementById("outputHumidity").textContent = `Humidity: ${response.main.humidity}`;
+      } else {
+        console.log("Error in network request: " + xhr.statusText);
+      }});
+    
+    xhr.send(null);  
+  }  
+
+  document.getElementById("httpbinbutton").addEventListener("click", function(e){
+    e.preventDefault()
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://httpbin.org/post", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.addEventListener('load', function(){
+        if(xhr.status >= 200 && xhr.status < 400){
+          let response = JSON.parse(xhr.responseText);
+          document.getElementById("httpbinOutput").textContent = response.data;
+          console.log(response.data);
+        } else {
+          console.log("Error in network request: " + xhr.statusText);
+        }});
+    
+    xhr.send(JSON.stringify(document.getElementById("httpbininput").value));    
+    
+    });
+
+</script>
+</body>
+</html>
