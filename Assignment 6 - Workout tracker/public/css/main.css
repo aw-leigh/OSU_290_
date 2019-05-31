@@ -1,0 +1,37 @@
+table{
+    table-layout: fixed;
+}
+
+table td:nth-child(1){
+    display:none;
+} 
+
+table th:nth-child(1){
+    display:none;
+} 
+
+.button-header-col{
+    width: 9%;
+}
+
+.number-header-col{
+    width: 13%;
+}
+
+#name-header-col{
+    width: 32%;
+}
+
+#date-header-col{
+    width: 20%;
+}
+
+#unit-header-col{
+    width: 14%;
+}
+
+.table td, .table th {
+    padding: .7rem .7rem;
+    height: 55px; 
+    vertical-align: middle;
+}
